@@ -8,4 +8,4 @@ UserRouter.post('/createuser',createUser);
 UserRouter.put('/:id',updateUser);
 UserRouter.delete('/:id',deleteUser);
 
-export default UserRouter; 
+export default UserRouter;  

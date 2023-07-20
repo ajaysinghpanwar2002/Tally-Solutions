@@ -1,3 +1,5 @@
 import Home from "./Home";
+import PlayGround from "./PlayGround";
+import Private from "./Private";
 
-export {Home};
+export { Home, PlayGround,Private };

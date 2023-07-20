@@ -13,7 +13,7 @@ async function getUsers(req, res) {
 async function createUser(req, res) {
     try {
         const newUser = await prisma.user.create({ data: req.body });
-        res.json(newUser);
+        res.json(newUser.id);
     } catch (error) {
         console.error(error);
     }

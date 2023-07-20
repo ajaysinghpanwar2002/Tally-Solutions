@@ -14,10 +14,13 @@ const __dirname = path.resolve();
 
 // Routes
 import ServiceRouter from "./routes/ServiceRouter.js";
-app.use("/",ServiceRouter);
+app.use("/", ServiceRouter);
 
 import UserRouter from "./routes/UserRouter.js";
-app.use("/users",UserRouter);
+app.use("/users", UserRouter);
+
+import LobbyRouter from './routes/LobbyRouter.js';
+app.use("/lobby", LobbyRouter);
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

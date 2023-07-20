@@ -1,18 +1,25 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "./components";
-import { Home } from "./pages";
+import { Home, PlayGround, Private } from "./pages";
 
 function App() {
   return (
     <div className="bg-gray-600 h-screen w-screen">
       <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-        </Routes>
+        <div style={{ display: "flex", flexDirection: "row-reverse" }}>
+          <Header />
+          <div style={{ flex: 1 }}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/playground" element={<PlayGround />} />
+              <Route path="/private" element={<Private />} />
+            </Routes>
+          </div>
+        </div>
       </Router>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
+
