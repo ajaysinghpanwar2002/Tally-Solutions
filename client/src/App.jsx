@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Header } from "./components";
-import { Home, PlayGround, Private } from "./pages";
+import { Home, PlayGround, Private, PrivateRoom,Public,PublicRoom } from "./pages";
 
 function App() {
   return (
@@ -13,6 +13,9 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/playground" element={<PlayGround />} />
               <Route path="/private" element={<Private />} />
+              <Route path="/public" element={<Public />} />
+              <Route path="/private/:id" element={<PrivateRoom />} />
+              <Route path="/public/:id" element={<PublicRoom />} />
             </Routes>
           </div>
         </div>

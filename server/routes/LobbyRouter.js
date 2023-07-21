@@ -1,7 +1,7 @@
 import express from 'express';
 const LobbyRouter = express.Router();
-import {createPrivateLobby} from "../controllers/LobbyController.js"
+import { createPrivateLobby, getPublicLobby } from "../controllers/LobbyController.js"
 
 LobbyRouter.post('/private', createPrivateLobby);
-
+LobbyRouter.get('/getpublic', getPublicLobby);
 export default LobbyRouter;  
