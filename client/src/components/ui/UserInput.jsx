@@ -8,6 +8,7 @@ import ChooseOne from '../../assets/ChooseOne.png';
 function UserInput() {
     const [username, setUsername] = useState("");
     const [loading, setLoading] = useState(false);
+    const [buttonClicked, setButtonClicked] = useState(false); // New state to track button click
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -31,6 +32,7 @@ function UserInput() {
     const handleSubmit = async () => {
         try {
             setLoading(true);
+            setButtonClicked(true); // Set the buttonClicked state to true
 
             let finalUsername = username;
 
@@ -57,6 +59,7 @@ function UserInput() {
         } finally {
             setLoading(false);
             setUsername("");
+            setButtonClicked(false); // Reset the buttonClicked state to false after form submission
         }
     };
 
@@ -81,8 +84,10 @@ function UserInput() {
                                 className="placeholder-gray-800 placeholder:text-center text-gray-900 bg-slate-400 border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-2/5"
                             />
                             <button
-                                className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded"
+                                className={`bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded ${buttonClicked ? "opacity-50 cursor-not-allowed" : "" // Apply a style for clicked state
+                                    }`}
                                 onClick={handleSubmit}
+                                disabled={buttonClicked} // Disable the button when clicked
                             >
                                 {!username ? "Submit as Random User" : `Submit as ${username}`}
                             </button>
