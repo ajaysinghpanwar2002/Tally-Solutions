@@ -3,6 +3,7 @@ import axios from "axios";
 import { SERVER_API } from "../../constants";
 import Loader from './Loader.jsx';
 import { useNavigate } from 'react-router-dom';
+import ChooseOne from '../../assets/ChooseOne.png';
 
 function UserInput() {
     const [username, setUsername] = useState("");
@@ -47,7 +48,7 @@ function UserInput() {
 
             localStorage.setItem("username", finalUsername);
             const userCreated = await axios.post(URL, payload).then((response) => {
-                localStorage.setItem("userid",response.data);
+                localStorage.setItem("userid", response.data);
                 navigate("/playground");
             });
 
@@ -62,20 +63,31 @@ function UserInput() {
     return (
         <div>
             {loading ? <Loader /> : (
-                <div className="flex justify-center mt-64">
-                    <input
-                        type="text"
-                        placeholder="Enter your name, else We have a username 😁 for you"
-                        onChange={handleChange}
-                        value={username}
-                        className="placeholder-gray-800 placeholder:text-center text-gray-900 bg-slate-400 border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-2/5"
-                    />
-                    <button
-                        className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded"
-                        onClick={handleSubmit}
-                    >
-                        {!username ? "Submit as Random User" : `Submit as ${username}`}
-                    </button>
+                <div>
+                    {username ? (
+                        <div>
+                            <div className="h-screen w-full  flex items-center justify-center pr-20">
+                                {/* <img src={ChooseOne} alt="choose one" className="object-cover w-full h-full" /> */}
+                                <img src={ChooseOne} alt="choose one" className="object-cover" />
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="flex justify-center mt-64">
+                            <input
+                                type="text"
+                                placeholder="Enter your name, else We have a username 😁 for you"
+                                onChange={handleChange}
+                                value={username}
+                                className="placeholder-gray-800 placeholder:text-center text-gray-900 bg-slate-400 border-2 border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-2/5"
+                            />
+                            <button
+                                className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded"
+                                onClick={handleSubmit}
+                            >
+                                {!username ? "Submit as Random User" : `Submit as ${username}`}
+                            </button>
+                        </div>
+                    )}
                 </div>
             )}
         </div>

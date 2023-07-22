@@ -2,15 +2,17 @@ import { useParams } from 'react-router-dom';
 import { Loader } from '../components';
 import { useEffect, useState } from 'react';
 import io from 'socket.io-client';
-import { SERVER_API } from '../constants';
+import { CLIENT_URL, SERVER_API } from '../constants';
 import "../styles.css";
 import { useNavigate } from 'react-router-dom';
+import copyIcon from '../assets/copyIcon.png';
 
 const socket = io.connect(`${SERVER_API}`);
 
 function PublicRoom() {
     let { roomid } = useParams();
 
+    const [userCount, setUserCount] = useState(0);
     const [loading, setLoading] = useState(true); // Set the initial loading state to true
     const [text, setText] = useState("");
     const [inputValue, setInputValue] = useState("");
@@ -24,6 +26,7 @@ function PublicRoom() {
     const [started, setStarted] = useState(true);
     const [progress, setProgress] = useState(0);
     const navigate = useNavigate();
+    const [publicUrl, setpublicUrl] = useState(`${CLIENT_URL}/public/${roomid}`);
 
     const [otherUsersPorgress, setOtherUsersPorgress] = useState("");
 
@@ -43,7 +46,11 @@ function PublicRoom() {
         socket.on("recieved_progress", (data) => {
             setOtherUsersPorgress(data);
         })
+        socket.on('updateUserCount', (count) => {
+            setUserCount(count);
+        });
     }, [socket])
+    
     const setTextAndWords = () => {
         const texts = [
             `You never read a book on psychology, Tippy. You didn't need to. You knew by some divine instinct that you can make more friends in two months by becoming genuinely interested in other people than you can in two years by trying to get other people interested in you.`,
@@ -55,7 +62,17 @@ function PublicRoom() {
         setWords(words);
         setCompletedWords([]);
     };
+    const handleCopyClick = () => {
+        const textarea = document.createElement('textarea');
+        textarea.value = publicUrl;
+        document.body.appendChild(textarea);
 
+        textarea.select();
+        document.execCommand('copy');
+
+        document.body.removeChild(textarea);
+        alert("text copied to clipboard");
+    };
     useEffect(() => {
         if (started) {
             setTextAndWords();
@@ -126,7 +143,21 @@ function PublicRoom() {
             </div>
         );
     }
-    
+
+    if (userCount <= 1) {
+        return (
+            <div className=''>
+                <div className='flex justify-center mt-44 '>There is no active user in the lobby, share link </div>
+                <div className='flex justify-center '>
+                    <div className="text-white text-xl font-thin px-2 bg-slate-500 p-0.5 rounded cursor-pointer mt-8 flex justify-between items-center"
+                        onClick={handleCopyClick}>
+                        {publicUrl}
+                        <img src={copyIcon} alt="copy" className="h-4 pl-2" />
+                    </div>
+                </div>
+            </div>
+        )
+    }
 
     return (
         <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">

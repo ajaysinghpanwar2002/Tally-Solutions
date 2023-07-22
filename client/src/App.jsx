@@ -14,7 +14,7 @@ function App() {
               <Route path="/playground" element={<PlayGround />} />
               <Route path="/private" element={<Private />} />
               <Route path="/public" element={<Public />} />
-              <Route path="/private/:id" element={<PrivateRoom />} />
+              <Route path="/private/:roomid" element={<PrivateRoom />} />
               <Route path="/public/:roomid" element={<PublicRoom />} />
             </Routes>
           </div>

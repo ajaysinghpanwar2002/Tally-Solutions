@@ -14,7 +14,7 @@ function Header() {
     }, [username]);
     return (
         <div className="flex flex-col w-60 mr-10 mt-16">
-            <div className='flex flex-col items-center '>
+            <div className='flex flex-col items-center ' onClick={()=>{navigate("/")}}>
                 <img src={userImage} alt="userImage" className='h-20 w-20' />
                 <div className="text-white font-bold py-2 px-4 flex justify-center">{username}</div>
             </div>
@@ -23,7 +23,7 @@ function Header() {
                 <button className='bg-slate-500 hover:bg-slate-700 text-white font-bold py-10 px-6 rounded mt-4' onClick={()=>{navigate("/public")}}>Compete with People</button>
                 <button className='bg-slate-500 hover:bg-slate-700 text-white font-bold py-10 px-6 rounded mt-4' onClick={()=>{navigate("/private")}}>Compete with Friends</button>
             </div>
-            <div className='text-white font-bold py-2 px-4 mt-2 flex justify-center'>Made with Love by 302B</div>
+            <div className='text-white font-bold py-2 px-4 mt-2 flex justify-center'>Made with ❤️ by 302B</div>
         </div>
     )
 }

@@ -27,10 +27,10 @@ app.use("/lobby", LobbyRouter);
 const port = process.env.PORT || 3001;
 
 const server = http.createServer(app);
-const io = new Server(server,{
-    cors:{
+const io = new Server(server, {
+    cors: {
         origin: "http://localhost:5173",
-        methods: ["GET","POST"],
+        methods: ["GET", "POST"],
     },
 });
 
@@ -39,15 +39,25 @@ io.on('connection', (socket) => {
 
     socket.on('ProgressUpdate', (data) => {
         console.log(`Received progress update: ${data.progress}`);
-        socket.to(data.roomid).emit("recieved_progress",data.progress);
+        socket.to(data.roomid).emit("recieved_progress", data.progress);
     });
 
     socket.on('disconnect', () => {
-        console.log('A user disconnected.');
+        console.log('User disconnected.');
+        const rooms = io.sockets.adapter.rooms;
+        rooms.forEach((room) => {
+            if (room.has(socket.id)) {
+                const userCount = room.size - 1;
+                io.to(room).emit('updateUserCount', userCount);
+            }
+        });
     });
 
-    socket.on("join_rooom", (data)=>{
+    socket.on("join_rooom", (data) => {
         socket.join(data);
+        const roomUsers = io.sockets.adapter.rooms.get(data);
+        const userCount = roomUsers ? roomUsers.size : 0;
+        io.to(data).emit('updateUserCount', userCount);
     })
 });
 
