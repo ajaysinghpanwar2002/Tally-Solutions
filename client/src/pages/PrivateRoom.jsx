@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { Loader } from '../components';
 import { useEffect, useState } from 'react';
+import PlayGround from './PlayGround';
 
 function PrivateRoom() {
     let { id } = useParams();
@@ -15,15 +16,17 @@ function PrivateRoom() {
     }, []);
 
     return (
-        <div>
-            {loading ? <Loader /> :
-                (
-                    <div>
-                        <div className='flex flex-col'>
-                        
-                        </div>
-                    </div>
-                )}
+        <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50">
+            {loading ? (
+                <div className="relative z-50 mt-96">
+                    Fetching Users with lobbyID, {id}
+                    <Loader />
+                </div>
+            ) : (
+                <div>
+                    <PlayGround/>
+                </div>
+            )}
         </div>
     );
 }
