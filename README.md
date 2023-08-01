@@ -45,6 +45,21 @@
 #### 4. Implementing Queue DS: For creating the public lobbies on demand. 
 #### 5. Observer Mode: Ability to spectate ongoing games.
 
+## Notes. (dealine 30 Nov)
+
+#### 1. Implement user authentication using Hash Tables to securely store user credentials and manage user login sessions
+#### 2. Store user profiles in a Binary Search Tree to enable fast searching and retrieval of user information.
+#### 3. Allow users to send and receive friend requests, and represent the network of user connections using an undirected Graph data structure.
+#### 4. Use a Doubly Linked List to efficiently manage the list of lobbies, enabling easy navigation and manipulation of lobby data.
+#### 5. Implement a Queue data structure to manage real-time notifications for new friend requests, post likes, and other user activities.
+#### 6. Utilize a Trie data structure to efficiently search and manage user chat history for seamless communication.
+#### 7. Use a Min-Heap data structure to display trending lobbies based on likes and engagement, ensuring a user-friendly and engaging experience.
+#### 8. Implement an LRU Cache to optimize data access, reduce database queries, and enhance overall app performance.
+#### 9. Use a Segment Tree data structure to efficiently store and manage user activity data, such as counting lobby likes and engagements.
+#### 10. Utilize a Fenwick Tree (Binary Indexed Tree) to efficiently calculate lobby visibility based on user settings, enhancing lobby recommendation.
+#### 11. Use a Priority Queue to rank users based on their activity level, lobby engagement, and other metrics, fostering healthy competition and user interaction.
+#### 12. Implement a Red-Black Tree data structure to store user data for efficient search by name or username, enhancing data retrieval and user management.
+
 # Tally CodeBrewers 2023
 
 ### I participated in a hackathon organised by Tally solution,  
